@@ -1,0 +1,15 @@
+name: Critical Issue Notifications
+
+on:
+  issues:
+    types:  [opened, edited]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for Critical Label
+        if: github.event.action != 'deleted' && contains(github.event.issue.labels.*.name, 'critical')
+        run: |
+        
